@@ -1,0 +1,89 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Roles</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">DataTables</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  <div class="container ">
+  <div class="row px-2 d-flex justify-content-between">
+    <button class="btn btn-success col-sm-12 col-md-3 mb-2" (click)="openCreateRole()"><i class="fas fa-plus"></i> Crear Nuevo</button>
+    <button class="btn btn-secondary col-sm-12 col-md-2 mb-2 btn-sm" (click)="exportToPDF()">Exportar a PDF</button>
+    </div>
+  </div>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Lista de Roles</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="tabla" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nombre</th>
+                  <th>Acciones</th>
+                  
+                </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let role of getCurrentPageItems(); let index=index">
+                  <td>{{index+1}}</td>
+                  <td>{{role.name}}</td>
+                  <td>
+                    <button class="btn btn-warning btn-sm" (click)="editRole(role)"><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-danger btn-sm mx-2" (click)="deleteRole(role)"><i class="fas fa-trash-alt"></i></button>
+                  </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>#</th>
+                  <th>Nombre</th>
+                  <th>Acciones</th>
+                  
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+          <nav aria-label="..." class="mt-4">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link buttonPointer {{currentPage==1 ? 'disabled' : ''}}" (click)="prevPage()">Previous</a>
+              </li>
+
+              <li class="page-item  {{currentPage==numPage ? 'active' : ''}}" *ngFor="let numPage of getPageNumbers()">
+                <a class="page-link buttonPointer"  (click)="currentPage = numPage">{{numPage}}</a>
+              </li>
+            
+              <li class="page-item">
+                <a class="page-link buttonPointer {{currentPage==totalPages() ? 'disabled' : ''}}" (click)="nextPage()">Next</a>
+              </li>
+            </ul>
+          </nav>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->

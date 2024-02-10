@@ -1,0 +1,47 @@
+/* You can add global styles to this file, and also import other style files */
+
+a{
+  text-decoration: none !important;
+}
+
+.modal-backdrop {
+    z-index: 1050 !important;  /* O cualquier número mayor que el z-index del modal */
+  }
+  @import "~alertifyjs/build/css/alertify.min.css";
+@import "~alertifyjs/build/css/themes/bootstrap.rtl.min.css";
+
+/* alertify-custom.css */
+/* styles.css o styles.scss */
+
+/* Personaliza los estilos para la función confirm de Alertify */
+.alertify-confirm {
+  /* Estilos para el cuadro de confirmación */
+  background-color: green;
+  border: 1px solid red;
+  color: rebeccapurple;
+}
+
+/* Estilos para los botones de confirmación */
+.alertify-confirm .ajs-ok {
+  background-color: gold;
+  color:green;
+}
+
+.alertify-confirm .ajs-cancel {
+  background-color: rebeccapurple;
+  color: wheat;
+}
+
+/* Otros estilos según tus preferencias */
+
+.card{
+  margin-bottom: 0px;
+}
+
+.buttonPointer{
+  cursor: pointer !important;
+}
+
+.searchProduct{
+width: 26% !important;
+}

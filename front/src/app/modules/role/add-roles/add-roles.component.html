@@ -1,0 +1,27 @@
+<div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title">Agregar Rol</h3>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="exampleInputEmail1">Nombre</label>
+          <input type="text" [(ngModel)]="name" name="name" class="form-control" id="exampleInputEmail1" placeholder="Ingresa un Nombre de Rol">
+        </div>
+        
+       
+      </div>
+      <!-- /.card-body -->
+
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary" (click)="createRole()">Guardar</button>
+        
+      </div>
+    </form>
+    
+  </div>
