@@ -11,6 +11,7 @@ import router_category from './routes/category';
 import router_role from './routes/role';
 import router_user from './routes/user';
 import router_client from './routes/client';
+import router_sale from './routes/sale';
 import { router as router_auth } from './routes/auth';
 
 
@@ -28,6 +29,7 @@ app.use('/categories', router_category);
 app.use('/roles',router_role);
 app.use('/users',router_user);
 app.use('/clients',router_client);
+app.use('/sales',router_sale);
 
 
 

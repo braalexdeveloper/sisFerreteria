@@ -5,9 +5,9 @@ const router=express.Router();
 import clientController from '../controllers/client';
 import { checkJwt } from '../middlewares/session';
 
-router.get('',clientController.allClients);
-router.post('',clientController.createClient);
-router.put('/:id',clientController.updateClient);
-router.delete('/:id',clientController.deleteClient);
+router.get('',checkJwt,clientController.allClients);
+router.post('',checkJwt,clientController.createClient);
+router.put('/:id',checkJwt,clientController.updateClient);
+router.delete('/:id',checkJwt,clientController.deleteClient);
 
 export default router;

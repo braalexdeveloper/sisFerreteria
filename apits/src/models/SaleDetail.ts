@@ -23,6 +23,8 @@ const SaleDetailModel=(sequealize:any)=>{
                   type: DataTypes.DECIMAL,
                   allowNull: false,
                 }
+
+                
               },
               {
                 timestamps: false,

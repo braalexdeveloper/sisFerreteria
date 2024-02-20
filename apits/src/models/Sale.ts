@@ -37,8 +37,8 @@ const SaleModel=(sequealize:any)=>{
 
     Sale.associate = (models:any) => {
       Sale.belongsToMany(models.Product,{through: models.SaleDetail});
-      
-  }
+      Sale.belongsTo(models.Client);
+    }
 
     return Sale;
 }

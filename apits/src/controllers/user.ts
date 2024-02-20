@@ -1,11 +1,16 @@
 import { Request, Response } from 'express';
 import { models } from '../db';
-const { User }=models;
+const { User,Role }=models;
+import fs from 'fs';
+import path from 'path';
+import { User } from '../interfaces/user.interface'
+
+import { encrypt } from "../utils/bcrypt.handle"
 
 const userController = {
   allUsers: async (req: Request, res: Response) => {
     try {
-      const users = await User.findAll();
+      const users = await User.findAll({include:Role});
       return res.status(200).json({
         users,
       });
@@ -33,10 +38,25 @@ const userController = {
 
   createUser: async (req: Request, res: Response) => {
     try {
-      const user = await User.create(req.body);
+
+      const { name,email,password,RoleId }=req.body;
+
+      let passHash=await encrypt(password);
+      let pathAvatar='';
+
+      if(req.file){
+       pathAvatar='/users/'+req.file.filename;
+      }
+
+     
+
+      const user = await User.create({ name,email,password:passHash,image:pathAvatar,RoleId });
+      // Obtener el usuario recién creado incluyendo su rol asociado
+const userWithRole = await User.findByPk(user.id, { include: Role });
+
       res.status(200).json({
         message: "User creado correctamente",
-        user,
+        user:userWithRole,
       });
     } catch (error:any) {
       console.error("Error al crear el user:", error);
@@ -49,12 +69,37 @@ const userController = {
 
   updateUser: async (req: Request, res: Response) => {
     try {
+
+      let user:User={
+        name:req.body.name,
+        email:req.body.email,
+        password:req.body.password || '',
+        RoleId:req.body.RoleId
+      }
+
+if(!user.password){
+  delete user.password;
+}
+
+      let imagePath='';
+
+     if(req.file){
+      let userFound=await User.findByPk(req.params.id);
+if(userFound.image){
+fs.unlinkSync(path.join(__dirname,'..','uploads',userFound.image));
+}
+       
+
+       imagePath ="/users/"+req.file.filename;
+
+        user={...user,image:imagePath}
+     }
       // Realizar la actualización y obtener el número de filas actualizadas
-      const [updatedRowCount] = await User.update(req.body, { where: { id: req.params.id } });
+      const [updatedRowCount] = await User.update(user, { where: { id: req.params.id } });
 
       if (updatedRowCount > 0) {
         // Si se actualizó al menos una fila, realizar una consulta para obtener el usero actualizado
-        const updateduser = await User.findByPk(req.params.id);
+        const updateduser = await User.findByPk(req.params.id,{include:Role});
 
         res.status(200).json({
           message: "user actualizado correctamente",

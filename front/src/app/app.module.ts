@@ -10,6 +10,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CategorieComponent } from './modules/categorie/categorie.component';
 import { ProductComponent } from './modules/product/product.component';
+import { ClientComponent } from './modules/client/client.component';
+import { SaleComponent } from './modules/sale/sale.component';
 
 
 
@@ -18,7 +20,9 @@ import { ProductComponent } from './modules/product/product.component';
     AppComponent,
     LoginComponent,
     CategorieComponent,
-    ProductComponent
+    ProductComponent,
+    ClientComponent,
+    SaleComponent
   ],
   imports: [
  

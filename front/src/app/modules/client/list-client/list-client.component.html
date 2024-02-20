@@ -1,0 +1,104 @@
+
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Clientes</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">DataTables</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  <div class="container ">
+  <div class="row px-2 d-flex justify-content-between">
+    <button class="btn btn-success col-sm-12 col-md-3 mb-2" (click)="createClient()"><i class="fas fa-plus"></i> Crear Nuevo</button>
+   
+    <button class="btn btn-secondary col-sm-12 col-md-2 mb-2 btn-sm" (click)="exportToPDF()">Exportar a PDF</button>
+  </div>
+  <!-- SidebarSearch Form -->
+  <div class="row">
+    <div class="input-group searchProduct col-sm-12 col-md-3 my-2" >
+      <input class="form-control " type="search" (input)="allClients()" [(ngModel)]="textSearch" name="txtSearch" placeholder="Busca por Dni" >
+      <div class="input-group-append">
+        <button class="btn btn-secondary" disabled>
+          <i class="fas fa-search fa-fw"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  </div>
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Lista de Clientes</h3>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="tabla" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Apellidos</th>
+                  <th>Dni</th>
+                  <th>Ruc</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Address</th>
+                  <th>Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let client of clients | paginate: { itemsPerPage: 2, currentPage: p }">
+                  <td>{{client.name}}</td>
+                  <td>{{client.lastName}}</td>
+                  <td>{{client.dni}}</td>
+                  <td>{{client.ruc}}</td>
+                  <td>{{client.email}}</td>
+                  <td>{{client.phone}}</td>
+                  <td>{{client.address}}</td>
+                  <td>
+                    <button class="btn btn-warning btn-sm" (click)="updateClient(client)" ><i class="fas fa-edit"></i></button>
+                    <button class="btn btn-danger btn-sm mx-2" (click)="deleteClient(client.id)" ><i class="fas fa-trash-alt"></i></button>
+                  </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Apellidos</th>
+                  <th>Dni</th>
+                  <th>Ruc</th>
+                  <th>Email</th>
+                  <th>Phone</th>
+                  <th>Address</th>
+                  <th>Acciones</th>
+                </tr>
+                </tfoot>
+              </table>
+            </div>
+            <!-- /.card-body -->
+
+          </div>
+        
+        </div>
+        <!-- /.col -->
+        <div class="col-12 pt-4 d-flex justify-content-center">
+          <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->

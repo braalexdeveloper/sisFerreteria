@@ -1,1 +1,55 @@
-<p>add-user works!</p>
+
+<div class="card card-primary">
+    <div class="card-header">
+      <h3 class="card-title">Agregar Usuario</h3>
+      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form >
+      <div class="card-body">
+     
+        <div class="form-group">
+          <label for="exampleInputEmail1">Nombre <span class="text-danger">*</span></label>
+          <input type="text" [(ngModel)]="user.name" name="name" class="form-control"  placeholder="Ingresa un Nombre">
+        </div>
+        
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email<span class="text-danger">*</span></label>
+            <input type="email" [(ngModel)]="user.email" name="email" class="form-control" placeholder="Ingresa el email">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Password<span class="text-danger">*</span></label>
+            <input type="password" [(ngModel)]="user.password" name="password" class="form-control" placeholder="Ingresa la Password">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Roles <span class="text-danger">*</span></label>
+            <select class="form-select" [(ngModel)]="user.RoleId" name="RoleId">
+              <option value="" disabled selected>Selecciona un Rol</option>
+              <option value="{{role.id}}" *ngFor="let role of roles">{{role.name}}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Imagen</label>
+            <input type="file"  (change)="handleFileInput($event)" class="form-control" placeholder="Ingresa una imagen">
+          </div>
+
+       
+      </div>
+      <!-- /.card-body -->
+
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary" (click)="createUser()">Guardar</button>
+        
+      </div>
+    </form>
+    
+  </div>
+
+
+

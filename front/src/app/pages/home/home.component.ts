@@ -8,10 +8,14 @@ import { AuthService } from 'src/app/service/auth.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  userLog:any='';
  constructor(
   private authService:AuthService,
   private router:Router
- ){}
+ ){
+  this.userLog=JSON.parse(localStorage.getItem('user') || '[]');
+  console.log(this.userLog);
+ }
 
  logout(){
    let data=JSON.parse(localStorage.getItem('user') || '[]');

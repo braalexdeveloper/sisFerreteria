@@ -19,6 +19,7 @@ const UserModel=(sequealize:any)=>{
                 email: {
                   type: DataTypes.STRING,
                   allowNull: false,
+                  unique:true
                 },
                
                 password: {
@@ -28,7 +29,7 @@ const UserModel=(sequealize:any)=>{
                 image: {
                   type: DataTypes.STRING,
                   allowNull:true,
-                  defaultValue: "foto-perfil-default.png"
+                  
                 },
                 token:{
                   type:DataTypes.STRING,

@@ -38,6 +38,7 @@ const Product=sequelize.define(
 
  Product.associate=(models:any)=>{
    Product.belongsTo(models.Category);
+   Product.belongsToMany(models.Sale,{through: models.SaleDetail});
  }
 
  return Product;
