@@ -3,6 +3,7 @@ import { Response,Request } from 'express';
 import {models} from '../db';
 const { Client } =models;
 import { Client as ClientInterface } from '../interfaces/client.interface'
+import { Op } from 'sequelize';
 
 const clientController={
   allClients:async(req:Request,res:Response)=>{
@@ -12,7 +13,11 @@ const clientController={
     	if(textSearch){
          clients=await Client.findAll({
        	 where:{
-       	 	dni:textSearch
+          [Op.or]:[
+            { dni: textSearch },
+            { ruc: textSearch }
+            ]
+       	 	
        	 }
        });
     	}else{

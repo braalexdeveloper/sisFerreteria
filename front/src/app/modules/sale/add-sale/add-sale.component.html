@@ -1,1 +1,133 @@
-<p>add-sale works!</p>
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title">Agregar Venta</h3>
+        <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <!-- /.card-header -->
+    <!-- form start -->
+    <form>
+        <div class="card-body">
+            <div class="form-group">
+                <label>Cliente<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" [(ngModel)]="txtSearch" name="txtSearch" (input)="getClient()" placeholder="Buscar por Dni o Ruc">
+                <div class="row d-flex justify-content-between mt-2">
+                    <div class="form-group col-3">
+                        <label>Dni</label>
+                        <input type="text" [(ngModel)]="dni" name="dni" class="form-control" disabled>
+                        <input type="hidden" [(ngModel)]="ClientId"  name="ClientId" class="form-control" >
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label>Ruc</label>
+                        <input type="text" [(ngModel)]="ruc" name="ruc" class="form-control" disabled>
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label>Nombre</label>
+                        <input type="text" [(ngModel)]="name" name="name" class="form-control" disabled>
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label>Apellidos</label>
+                        <input type="text" [(ngModel)]="lastName" name="lastName" class="form-control" disabled>
+                    </div>
+                </div>
+            </div>
+       <!--      
+         <hr class="mb-4">
+            <div class="form-group">
+                <label>Producto<span class="text-danger">*</span></label>
+                <input type="text" class="form-control" placeholder="Buscar por Nombre o Codigo">
+                <div class="row d-flex justify-content-between mt-2">
+                    <div class="form-group col-3">
+                        <label>Nombre</label>
+                        <input type="text" class="form-control" disabled>
+                        <input type="hidden" name="ProductId" class="form-control" >
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label>Precio</label>
+                        <input type="text" class="form-control" disabled>
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label>Stock</label>
+                        <input type="text" class="form-control" disabled>
+                    </div>
+
+                    <div class="form-group col-3">
+                        <label>Cantidad</label>
+                        <input type="number" class="form-control" >
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button class="btn btn-success">Agregar Producto</button>
+                <div class="card mt-2">
+                    <div class="card-header">
+                      <h3 class="card-title">Productos Seleccionados</h3>
+                    </div>
+                   
+                    <div class="card-body">
+                      <table id="tabla" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>Acciones</th>
+                            <th>Producto</th>
+                            <th>Precio</th>
+                            <th>Cantidad</th>
+                            <th>SubTotal</th>
+                           
+                        </tr>
+                        </thead>
+                        <tbody>
+                          <tr >
+                            <td>
+                            <button class="btn btn-danger">Eliminar</button>
+                            
+                            </td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          <td></td>
+                          
+                          
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            
+                            <th colspan="4" class="text-end">Total</th>
+                            <th>
+                                s/ 1500,00
+                            </th>
+                            
+                        </tr>
+                        </tfoot>
+                      </table>
+                    </div>
+                   
+        
+                  </div>
+            </div>-->
+
+           <!-- <div class="form-group">
+                <label for="exampleInputEmail1">Fecha <span class="text-danger">*</span></label>
+                <input type="date" [(ngModel)]="sale_date" name="sale_date" class="form-control">
+            </div>-->
+
+          
+
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary" (click)="createVenta()">Registrar</button>
+
+        </div>
+    </form>
+
+</div>

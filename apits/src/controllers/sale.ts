@@ -1,17 +1,27 @@
 import { Response,Request } from 'express';
 import {models} from '../db';
 
-const {Sale,SaleDetail}=models;
+const {Sale,SaleDetail,Client}=models;
 
 const saleController={
 	allSales:async(req:Request,res:Response)=>{
       try{
-        let sales=await Sale.findAll();
+        let sales=await Sale.findAll({include:Client});
 
+        let salesFormat=sales.map((item:any)=>{
+           return {
+            id:item.id,
+            sale_date:new Date(item.sale_date).toLocaleDateString('es-ES'),
+            status:item.status,
+            total:item.total,
+            ClientId:item.ClientId,
+            clientName:(item.Client.name+" "+item.Client.lastName)
+           }
+        });
 
         return res.status(200).json({
         	message:"success",
-        	sales
+        	sales:salesFormat
         });
       }catch(error:any){
         return res.status(500).json({

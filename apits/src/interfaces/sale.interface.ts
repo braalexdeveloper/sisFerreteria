@@ -4,5 +4,7 @@ export interface Sale{
 	tax:number;
 	total:number;
 	status?:any;
+	ClientId:any;
+	clientName:string;
 
 }
