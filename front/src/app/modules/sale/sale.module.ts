@@ -7,13 +7,15 @@ import { AddSaleComponent } from './add-sale/add-sale.component';
 import { AditSaleComponent } from './adit-sale/adit-sale.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { FormsModule } from '@angular/forms';
+import { ViewDetailComponent } from './view-detail/view-detail.component';
 
 
 @NgModule({
   declarations: [
     ListSalesComponent,
     AddSaleComponent,
-    AditSaleComponent
+    AditSaleComponent,
+    ViewDetailComponent
   ],
   imports: [
     CommonModule,

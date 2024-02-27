@@ -1,0 +1,49 @@
+<div class="py-2 px-2">
+    
+  <div class="card mt-2">
+    <div class="card-header">
+      <h3 class="card-title">Productos Comprados</h3>
+    </div>
+   
+    <div class="card-body">
+      <table id="tabla" class="table table-bordered table-hover">
+        <thead>
+        <tr>
+           
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>SubTotal</th>
+           
+        </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of sale.products">
+          <td>{{product.name}}</td>
+          <td>{{product.price}}</td>
+          <td>{{product.quantity}}</td>
+          <td>{{product.subtotal}}</td>
+          
+          
+        </tr>
+        </tbody>
+        <tfoot>
+        <tr>
+            
+            <th colspan="3" class="text-end">Total</th>
+            <th>
+                s/ {{sale.total}}
+            </th>
+            
+        </tr>
+        </tfoot>
+      </table>
+    </div>
+    <div class="card-footer">
+        <button class="btn btn-danger float-sm-right my-2" (click)="activeModal.dismiss()">Cerrar</button>
+    </div>
+   
+    
+  </div>
+ 
+</div>

@@ -22,7 +22,7 @@ export class ClientService {
     return this.httpHeaders;
     }
     
-  allClients(dni:string):Observable<any>{
+  allClients(dni:string=''):Observable<any>{
     return this.http.get(this.api+"clients?textSearch="+dni,{headers:this.headers()});
   }
 

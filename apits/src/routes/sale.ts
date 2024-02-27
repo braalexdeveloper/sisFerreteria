@@ -6,6 +6,7 @@ import saleController from '../controllers/sale';
 import { checkJwt } from '../middlewares/session';
 
 router.get('',saleController.allSales);
+router.get('/:id',saleController.getSale);
 router.post('',saleController.createSale);
 
 

@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { UserComponent } from 'src/app/modules/user/user.component';
 
 
+
 @NgModule({
   declarations: [
     RoleComponent,
@@ -21,7 +22,7 @@ import { UserComponent } from 'src/app/modules/user/user.component';
     HomeRoutingModule,
     NgbModule,
     FormsModule,
-    
+   
   ]
 })
 export class HomeModule { }

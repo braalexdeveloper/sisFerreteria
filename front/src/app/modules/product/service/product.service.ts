@@ -21,7 +21,7 @@ export class ProductService {
     return this.httpHeaders;
     }
 
-  allProducts(textSearch:string):Observable<any>{
+  allProducts(textSearch:string=''):Observable<any>{
   return this.http.get(this.api+"products?textSearch="+textSearch,{headers:this.headers()})
   }
 

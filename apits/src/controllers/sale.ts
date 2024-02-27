@@ -1,7 +1,7 @@
 import { Response,Request } from 'express';
 import {models} from '../db';
 
-const {Sale,SaleDetail,Client}=models;
+const {Sale,SaleDetail,Client,Product}=models;
 
 const saleController={
 	allSales:async(req:Request,res:Response)=>{
@@ -32,10 +32,10 @@ const saleController={
 	createSale:async(req:Request,res:Response)=>{
        try{
 
-       	let { sale_date,tax,total,saleDetails }=req.body;
+       	let { sale_date,total,saleDetails }=req.body;
 
-       	if(!sale_date || !tax || !total){
-          return res.status(400).json({error:"Debe rellenar los campos obligatorios(sale_date,tax,total)!"});
+       	if(!sale_date || !total || saleDetails.length<1){
+          return res.status(400).json({error:"Debe rellenar los campos obligatorios o escoger un producto!"});
        	}
         
         let sale=await Sale.create(req.body);
@@ -45,11 +45,29 @@ const saleController={
            await SaleDetail.create({quantity,discount,subTotal,ProductId,SaleId:sale.id});
           }
         
+
+        // Obtener la venta con su cliente asociado
+const saleWithClient = await models.Sale.findOne({
+  where: { id: sale.id },
+  include: {
+    model: models.Client,
+    
+  },
+});
+
+let formatSale={
+  id:saleWithClient.id,
+  sale_date:new Date(saleWithClient.sale_date).toLocaleDateString('es-ES'),
+  total:saleWithClient.total,
+  status:saleWithClient.status,
+  ClientId:saleWithClient.ClientId,
+  clientName:(saleWithClient.Client.name+" "+saleWithClient.Client.lastName)
+}
         
 
         return res.status(200).json({
         	message:"Venta creada correctamente!",
-        	sale
+        	sale:formatSale
         });
 
       }catch(err:any){
@@ -59,7 +77,55 @@ const saleController={
         });
       }
 
-	}
+	},
+  getSale:async(req:Request,res:Response)=>{
+   
+   try{
+      const sale=await Sale.findByPk(req.params.id,{
+  include: [
+  {
+    model: Client // Incluye el modelo Client
+  },
+  {
+    model:Product
+  }
+  ]
+});
+
+      let formatSale={
+        id:sale.id,
+        sale_date:new Date(sale.sale_date).toLocaleDateString('es-ES'),
+        total:parseFloat(sale.total).toFixed(2),
+        client:sale.Client.name+" "+sale.Client.lastName,
+        dni:sale.Client.dni,
+        ruc:sale.Client.ruc,
+        email:sale.Client.email,
+        phone:sale.Client.phone,
+        address:sale.Client.address,
+        products:sale.Products.map((el:any)=>{
+         return{
+          id:el.id,
+          name:el.name,
+          description:el.description,
+          price:parseFloat(el.price).toFixed(2),
+          image:el.image,
+          quantity:el.SaleDetail.quantity,
+          subtotal:parseFloat(el.SaleDetail.subTotal).toFixed(2)
+          }
+
+        })
+      }
+
+      return res.status(200).json({
+        sale:formatSale
+      });
+   }catch(error){
+console.log(error)
+        return res.status(500).json({
+          error
+        });
+   }
+  }
 
 
 }

@@ -17,7 +17,7 @@ const SaleModel=(sequealize:any)=>{
                           
                 tax: {
                   type: DataTypes.DECIMAL,
-                  allowNull: false,
+                  allowNull: true,
                 },
                 total: {
                   type: DataTypes.DECIMAL,
@@ -37,6 +37,7 @@ const SaleModel=(sequealize:any)=>{
 
     Sale.associate = (models:any) => {
       Sale.belongsToMany(models.Product,{through: models.SaleDetail});
+      Sale.hasMany(models.SaleDetail);
       Sale.belongsTo(models.Client);
     }
 

@@ -35,37 +35,37 @@
                     </div>
                 </div>
             </div>
-       <!--      
+           
          <hr class="mb-4">
             <div class="form-group">
                 <label>Producto<span class="text-danger">*</span></label>
-                <input type="text" class="form-control" placeholder="Buscar por Nombre o Codigo">
+                <input type="text" class="form-control" [(ngModel)]="txtSearchProduct" name="txtSearchProduct" (input)="getProduct()" placeholder="Buscar por Nombre o Codigo">
                 <div class="row d-flex justify-content-between mt-2">
                     <div class="form-group col-3">
                         <label>Nombre</label>
-                        <input type="text" class="form-control" disabled>
-                        <input type="hidden" name="ProductId" class="form-control" >
+                        <input type="text" [(ngModel)]="nameProduct" name="nameProduct" class="form-control" disabled>
+                        <input type="hidden" [(ngModel)]="ProductId" name="ProductId" class="form-control" >
                     </div>
 
                     <div class="form-group col-3">
                         <label>Precio</label>
-                        <input type="text" class="form-control" disabled>
+                        <input type="number" [(ngModel)]="price" name="price" class="form-control" disabled>
                     </div>
 
                     <div class="form-group col-3">
                         <label>Stock</label>
-                        <input type="text" class="form-control" disabled>
+                        <input type="number" [(ngModel)]="stock" name="stock" class="form-control" disabled>
                     </div>
 
                     <div class="form-group col-3">
                         <label>Cantidad</label>
-                        <input type="number" class="form-control" >
+                        <input type="number" [(ngModel)]="quantity" name="quantity" class="form-control" >
                     </div>
                 </div>
             </div>
-
+ 
             <div>
-                <button class="btn btn-success">Agregar Producto</button>
+                <button class="btn btn-success" (click)="addProduct()" [disabled]="stock > 0 ? false : true" >Agregar Producto</button>
                 <div class="card mt-2">
                     <div class="card-header">
                       <h3 class="card-title">Productos Seleccionados</h3>
@@ -84,15 +84,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                          <tr >
+                          <tr *ngFor="let product of productsSelected">
                             <td>
-                            <button class="btn btn-danger">Eliminar</button>
+                            <button class="btn btn-danger" (click)="deleteProduct(product.ProductId)">Eliminar</button>
                             
                             </td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
-                          <td></td>
+                          <td>{{product.nameProduct}}</td>
+                          <td>{{product.price}}</td>
+                          <td>{{product.quantity}}</td>
+                          <td>{{product.subTotal}}</td>
                           
                           
                         </tr>
@@ -102,7 +102,7 @@
                             
                             <th colspan="4" class="text-end">Total</th>
                             <th>
-                                s/ 1500,00
+                                s/ {{total}}
                             </th>
                             
                         </tr>
@@ -112,7 +112,7 @@
                    
         
                   </div>
-            </div>-->
+            </div>
 
            <!-- <div class="form-group">
                 <label for="exampleInputEmail1">Fecha <span class="text-danger">*</span></label>

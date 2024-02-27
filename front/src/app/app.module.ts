@@ -12,6 +12,7 @@ import { CategorieComponent } from './modules/categorie/categorie.component';
 import { ProductComponent } from './modules/product/product.component';
 import { ClientComponent } from './modules/client/client.component';
 import { SaleComponent } from './modules/sale/sale.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -25,13 +26,12 @@ import { SaleComponent } from './modules/sale/sale.component';
     SaleComponent
   ],
   imports: [
- 
-
-    BrowserModule,
+     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    RouterModule.forRoot([]),
    
   ],
   providers: [],
