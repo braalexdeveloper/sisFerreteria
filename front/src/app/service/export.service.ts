@@ -38,8 +38,8 @@ export class ExportService {
 
     // Agregar imagen
   const logo = new Image();
-  logo.src = 'https://cdn-icons-png.flaticon.com/512/5149/5149120.png'; // Ruta de tu imagen
-  doc.addImage(logo, 'PNG', 10, 10, 20, 20); // x, y, ancho, alto
+  logo.src = 'assets/dist/img/logo.png'; // Ruta de tu imagen
+  doc.addImage(logo, 'PNG', 10, 10, 50, 25); // x, y, ancho, alto
   
   const pageWidth = doc.internal.pageSize.getWidth(); // Obtener el ancho de la página
     // Agregar encabezado
@@ -89,11 +89,11 @@ const xRight=pageWidth-titleWidth-10;
 
    
     // Agregar la tabla
-    let columnasName=["name","price","quantity","subtotal"];
-    const header = columnasName.map(column => column.toUpperCase());
+    /*let columnasName=["name","price","quantity","subtotal"];
+    const header = columnasName.map(column => column.toUpperCase());*/
     
     // Construir filas
-    const data = sale.products.map((row:any) => columnasName.map(col => row[col]));
+    /*const data = sale.products.map((row:any) => columnasName.map(col => row[col]));
    (doc as any).autoTable({
       head: [header],
       body: data,
@@ -102,7 +102,31 @@ const xRight=pageWidth-titleWidth-10;
       /*styles: {
         fillColor: [12, 116, 187] // Color de fondo de las celdas
       }*/
-    });
+   /* });*/
+
+
+   // Definir los nombres de las columnas en español
+  const columnasName = ["nombre", "precio", "cantidad", "subtotal"];
+
+  // Construir las etiquetas de encabezado en español
+  const header = columnasName.map(column => column.toUpperCase());
+
+  // Construir filas
+  const data = sale.products.map((row: any) => [
+    row.name, // Acceder a la propiedad 'nombre' en lugar de 'name'
+    row.price, // Acceder a la propiedad 'precio'
+    row.quantity, // Acceder a la propiedad 'cantidad'
+    row.subtotal // Acceder a la propiedad 'subtotal'
+  ]);
+
+  // Opciones para la tabla
+  const options = {
+    head: [header], // Usar las etiquetas de encabezado personalizadas
+    startY: 150
+  };
+
+  (doc as any).autoTable(columnasName, data, options);
+
 
     doc.output('dataurlnewwindow');
     // Descargar el archivo
